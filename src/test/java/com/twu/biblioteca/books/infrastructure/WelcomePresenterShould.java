@@ -1,5 +1,6 @@
-package com.twu.biblioteca.infrastructure;
+package com.twu.biblioteca.books.infrastructure;
 
+import com.twu.biblioteca.WelcomePresenter;
 import org.junit.Test;
 
 import java.io.PrintStream;
