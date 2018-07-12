@@ -5,6 +5,7 @@ import com.twu.biblioteca.books.application.BookShelves;
 import com.twu.biblioteca.books.application.BookShelvesInteractor;
 import com.twu.biblioteca.books.core.BookInfoBuilder;
 import com.twu.biblioteca.books.core.BookNotAvailable;
+import com.twu.biblioteca.books.core.NotAbleToReturnBook;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -37,7 +38,7 @@ public class BookPresenterShould {
 
     @Test
     public void showTheHeadersBeforeAnyBookInfo() {
-        when(bookShelvesMock.listBooks()).thenReturn(Arrays.asList(
+        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
                 new BookInfoBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
@@ -89,7 +90,7 @@ public class BookPresenterShould {
 
     @Test
     public void notShowCheckOutBooks() {
-        when(bookShelvesMock.listBooks()).thenReturn(Arrays.asList(
+        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
                 new BookInfoBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
@@ -103,7 +104,7 @@ public class BookPresenterShould {
 
     @Test
     public void sayThankYouWhenCheckingOutABook() {
-        when(bookShelvesMock.listBooks()).thenReturn(Arrays.asList(
+        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
                 new BookInfoBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
@@ -125,5 +126,32 @@ public class BookPresenterShould {
         doThrow(BookNotFound.class).when(bookShelvesMock).checkOut(anyString());
         presenter.checkOut("Harry Potter and the Philosopher's Stone");
         verify(outMock).println("That book is not available");
+    }
+
+    @Test
+    public void sayThanksForReturningABook() {
+        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
+                new BookInfoBuilder()
+                        .withTitle("Harry Potter and the Philosopher's Stone")
+                        .fromAuthor("J.K. Rowling")
+                        .publishedInYear(1997)
+                        .checkedOut()
+                        .build()));
+        presenter.returnBook("Harry Potter and the Philosopher's Stone");
+        verify(outMock).println("Thank you for returning the book");
+    }
+
+    @Test
+    public void sayTheBookIsNotValidToReturnWhenBookIsNotFound() {
+        doThrow(BookNotFound.class).when(bookShelvesMock).returnBook(anyString());
+        presenter.returnBook("Harry Potter and the Philosopher's Stone");
+        verify(outMock).println("That is not a valid book to return");
+    }
+
+    @Test
+    public void sayTheBookIsNotValidToReturnWhenBookIsYetAvailable() {
+        doThrow(NotAbleToReturnBook.class).when(bookShelvesMock).returnBook(anyString());
+        presenter.returnBook("Harry Potter and the Philosopher's Stone");
+        verify(outMock).println("That is not a valid book to return");
     }
 }

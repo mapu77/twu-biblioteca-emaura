@@ -8,4 +8,6 @@ public interface BookShelves {
     Collection<BookInfo> listBooks();
 
     void checkOut(String bookTitle) throws BookNotFound;
+
+    void returnBook(String bookTitle) throws BookNotFound;
 }

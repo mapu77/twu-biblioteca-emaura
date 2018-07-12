@@ -26,4 +26,18 @@ public class BookInfoShould {
         book.checkOut();
         book.checkOut();
     }
+
+    @Test(expected = NotAbleToReturnBook.class)
+    public void throwNotAbleToReturnWhenTryingToReturnBeingAvailable() {
+        BookInfo book = new BookInfo("some title");
+        book.returnCopy();
+    }
+
+    @Test
+    public void beAvailableAfterReturned() {
+        BookInfo book = new BookInfo("some title");
+        book.checkOut();
+        book.returnCopy();
+        assertThat(book.isAvailable(), is(true));
+    }
 }

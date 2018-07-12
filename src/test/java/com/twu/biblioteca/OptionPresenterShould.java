@@ -1,6 +1,5 @@
-package com.twu.biblioteca.books;
+package com.twu.biblioteca;
 
-import com.twu.biblioteca.OptionPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -33,18 +32,13 @@ public class OptionPresenterShould {
     }
 
     @Test
-    public void leaveALineAfterTheWelcome() {
-        optionPresenter.sayWelcome();
-        verify(outMock).println("\n");
-    }
-
-    @Test
     public void showMenuOptions() {
         optionPresenter.showMenu();
         InOrder inOrder = inOrder(outMock);
         inOrder.verify(outMock).println("Choose an option:");
         inOrder.verify(outMock).println("\t1. List books");
-        inOrder.verify(outMock).println("\t2. Checkout book");
+        inOrder.verify(outMock).println("\t2. Checkout a book");
+        inOrder.verify(outMock).println("\t3. Return a book");
         inOrder.verify(outMock).println("\t0. Exit");
         verifyNoMoreInteractions(outMock);
     }

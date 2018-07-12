@@ -43,4 +43,9 @@ public class BookInfo {
         if (this.isAvailable()) checkedOut = true;
         else throw new BookNotAvailable();
     }
+
+    public void returnCopy() {
+        if (this.isAvailable()) throw new NotAbleToReturnBook();
+        else checkedOut = false;
+    }
 }

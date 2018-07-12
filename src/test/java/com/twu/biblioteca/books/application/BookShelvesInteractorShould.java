@@ -20,10 +20,14 @@ public class BookShelvesInteractorShould {
     }
 
     @Test(expected = BookNotFound.class)
-    public void shouldThrowBookNotFoundWhenTryingToCheckOutABookThatIsNotAvailable() {
+    public void throwBookNotFoundWhenTryingToCheckOutABookThatIsNotAvailable() {
         BookShelvesInteractor bookShelves = new BookShelvesInteractor();
-        bookShelves.preloadBooks();
         bookShelves.checkOut("not existing book");
     }
 
+    @Test(expected = BookNotFound.class)
+    public void throwBookNotFoundWhenTryingToReturnABookThatIsNotAvailable() {
+        BookShelvesInteractor bookShelves = new BookShelvesInteractor();
+        bookShelves.returnBook("not existing book");
+    }
 }

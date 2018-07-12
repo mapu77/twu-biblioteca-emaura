@@ -27,6 +27,13 @@ public class BookShelvesInteractor implements BookShelves {
         else throw new BookNotFound();
     }
 
+    @Override
+    public void returnBook(String bookTitle) {
+        if (this.books.containsKey(bookTitle))
+            this.books.get(bookTitle).returnCopy();
+        else throw new BookNotFound();
+    }
+
     public void preloadBooks() {
         BookInfo book1 = new BookInfoBuilder().withTitle("Harry Potter and the Philosopher's Stone").fromAuthor("J.K Rowling").publishedInYear(1997).build();
         BookInfo book2 = new BookInfoBuilder().withTitle("Game of Thrones - A Game of Thrones").fromAuthor("George R. Martin").publishedInYear(1994).build();

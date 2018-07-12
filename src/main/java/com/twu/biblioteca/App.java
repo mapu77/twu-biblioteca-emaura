@@ -20,14 +20,17 @@ public class App {
                     bookPresenter.listBooks();
                     break;
                 case 2:
-                    System.out.println("What book do you want to checkout?");
+                    optionPresenter.askForCheckOut();
                     String bookTitle = user.readBookTitle();
                     bookPresenter.checkOut(bookTitle);
                     break;
+                case 3:
+                    optionPresenter.askForReturn();
+                    bookTitle = user.readBookTitle();
+                    bookPresenter.returnBook(bookTitle);
+                    break;
                 default:
-                    System.out.println("Select a valid option!");
-                    System.out.println();
-                    optionPresenter.showMenu();
+                    optionPresenter.sayInvalidOption();
             }
             optionPresenter.showMenu();
         }
