@@ -1,6 +1,6 @@
 package com.twu.biblioteca.books;
 
-import com.twu.biblioteca.WelcomePresenter;
+import com.twu.biblioteca.OptionPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -9,40 +9,43 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
 
-public class WelcomePresenterShould {
+public class OptionPresenterShould {
 
     private PrintStream outMock;
-    private WelcomePresenter welcomePresenter;
+    private OptionPresenter optionPresenter;
 
     @Before
     public void setUp() {
         outMock = mock(PrintStream.class);
-        welcomePresenter = new WelcomePresenter(outMock);
+        optionPresenter = new OptionPresenter(outMock);
     }
 
     @Test
     public void showAWelcomeMessage() {
-        welcomePresenter.sayWelcome();
+        optionPresenter.sayWelcome();
         verify(outMock).println("Welcome to the Bangalore Public Library system");
     }
 
     @Test
     public void showTwoFancyLinesWhenWelcoming() {
-        welcomePresenter.sayWelcome();
+        optionPresenter.sayWelcome();
         verify(outMock, times(2)).println("----------------------------------------------");
     }
 
     @Test
     public void leaveALineAfterTheWelcome() {
-        welcomePresenter.sayWelcome();
+        optionPresenter.sayWelcome();
         verify(outMock).println("\n");
     }
 
     @Test
     public void showMenuOptions() {
-        welcomePresenter.showMenu();
+        optionPresenter.showMenu();
         InOrder inOrder = inOrder(outMock);
         inOrder.verify(outMock).println("Choose an option:");
         inOrder.verify(outMock).println("\t1. List books");
+        inOrder.verify(outMock).println("\t2. Checkout book");
+        inOrder.verify(outMock).println("\t0. Exit");
+        verifyNoMoreInteractions(outMock);
     }
 }

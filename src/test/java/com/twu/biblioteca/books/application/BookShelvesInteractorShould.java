@@ -11,4 +11,19 @@ public class BookShelvesInteractorShould {
         BookShelves bookShelves = new BookShelvesInteractor();
         assertThat(bookShelves.listBooks().isEmpty(), is(true));
     }
+
+    @Test
+    public void haveSomeBooksWhenPreloaded() {
+        BookShelvesInteractor bookShelves = new BookShelvesInteractor();
+        bookShelves.preloadBooks();
+        assertThat(bookShelves.listBooks().isEmpty(), is(false));
+    }
+
+    @Test(expected = BookNotFound.class)
+    public void shouldThrowBookNotFoundWhenTryingToCheckOutABookThatIsNotAvailable() {
+        BookShelvesInteractor bookShelves = new BookShelvesInteractor();
+        bookShelves.preloadBooks();
+        bookShelves.checkOut("not existing book");
+    }
+
 }

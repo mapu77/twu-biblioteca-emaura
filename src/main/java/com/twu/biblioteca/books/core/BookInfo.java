@@ -1,10 +1,11 @@
-package com.twu.biblioteca.books.models;
+package com.twu.biblioteca.books.core;
 
 public class BookInfo {
 
     private final String title;
     private String authorName;
     private int publicationYear;
+    private boolean checkedOut;
 
     BookInfo(String title) {
         this.title = title;
@@ -28,5 +29,18 @@ public class BookInfo {
 
     void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
+    }
+
+    void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
+    public boolean isAvailable() {
+        return !checkedOut;
+    }
+
+    public void checkOut() {
+        if (this.isAvailable()) checkedOut = true;
+        else throw new BookNotAvailable();
     }
 }

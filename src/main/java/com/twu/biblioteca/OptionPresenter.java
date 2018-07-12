@@ -2,14 +2,14 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 
-public class WelcomePresenter {
+public class OptionPresenter {
     private static final String WELCOME_MESSAGE = "Welcome to the Bangalore Public Library system";
     private static final String FANCY_LINE = "----------------------------------------------";
     private static final String END_OF_LINE = "\n";
 
     private final PrintStream output;
 
-    public WelcomePresenter(PrintStream output) {
+    public OptionPresenter(PrintStream output) {
         this.output = output;
     }
 
@@ -23,5 +23,7 @@ public class WelcomePresenter {
     public void showMenu() {
         output.println("Choose an option:");
         output.println("\t1. List books");
+        output.println("\t2. Checkout book");
+        output.println("\t0. Exit");
     }
 }
