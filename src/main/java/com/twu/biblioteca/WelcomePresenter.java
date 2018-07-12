@@ -19,4 +19,9 @@ public class WelcomePresenter {
         output.println(FANCY_LINE);
         output.println(END_OF_LINE);
     }
+
+    public void showMenu() {
+        output.println("Choose an option:");
+        output.println("\t1. List books");
+    }
 }
