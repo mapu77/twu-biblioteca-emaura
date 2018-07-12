@@ -22,7 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="biblioteca" target="1.5" />
+      <module name="biblioteca" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
