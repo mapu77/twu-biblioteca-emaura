@@ -2,17 +2,20 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.books.application.BookShelvesInteractor;
 import com.twu.biblioteca.books.infrastructure.AbstractBookPresenter;
+import com.twu.biblioteca.books.infrastructure.BookInputController;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
 
 public class App {
 
     public static void main(String[] args) {
-        OptionPresenter optionPresenter = new OptionPresenter(System.out);
-        optionPresenter.sayWelcome();
-        optionPresenter.showMenu();
-        MenuInputController user = new MenuInputController(System.in);
+        AppPresenter appPresenter = new AppPresenter(System.out);
+        appPresenter.sayWelcome();
+        appPresenter.showMenu();
+        AppInputController user = new AppInputController(System.in);
+
         BookShelvesInteractor bookShelves = new BookShelvesInteractor();
         bookShelves.preloadBooks();
+        BookInputController bookInputController = new BookInputController(System.in);
         AbstractBookPresenter bookPresenter = new BookPresenter(bookShelves, System.out);
         while (!user.wantsToExit()) {
             switch (user.getSelectedOption()) {
@@ -20,21 +23,21 @@ public class App {
                     bookPresenter.listBooks();
                     break;
                 case 2:
-                    optionPresenter.askForCheckOut();
-                    String bookTitle = user.readBookTitle();
+                    appPresenter.askForBookCheckOut();
+                    String bookTitle = bookInputController.readBookTitle();
                     bookPresenter.checkOut(bookTitle);
                     break;
                 case 3:
-                    optionPresenter.askForReturn();
-                    bookTitle = user.readBookTitle();
+                    appPresenter.askForBookReturn();
+                    bookTitle = bookInputController.readBookTitle();
                     bookPresenter.returnBook(bookTitle);
                     break;
                 default:
-                    optionPresenter.sayInvalidOption();
+                    appPresenter.sayInvalidOption();
             }
-            optionPresenter.showMenu();
+            appPresenter.showMenu();
         }
-        System.out.println("Thanks for using our system");
+        appPresenter.sayFarewell();
     }
 
 }

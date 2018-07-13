@@ -8,32 +8,32 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
 
-public class OptionPresenterShould {
+public class AppPresenterShould {
 
     private PrintStream outMock;
-    private OptionPresenter optionPresenter;
+    private AppPresenter appPresenter;
 
     @Before
     public void setUp() {
         outMock = mock(PrintStream.class);
-        optionPresenter = new OptionPresenter(outMock);
+        appPresenter = new AppPresenter(outMock);
     }
 
     @Test
     public void showAWelcomeMessage() {
-        optionPresenter.sayWelcome();
+        appPresenter.sayWelcome();
         verify(outMock).println("Welcome to the Bangalore Public Library system");
     }
 
     @Test
     public void showTwoFancyLinesWhenWelcoming() {
-        optionPresenter.sayWelcome();
+        appPresenter.sayWelcome();
         verify(outMock, times(2)).println("----------------------------------------------");
     }
 
     @Test
     public void showMenuOptions() {
-        optionPresenter.showMenu();
+        appPresenter.showMenu();
         InOrder inOrder = inOrder(outMock);
         inOrder.verify(outMock).println("Choose an option:");
         inOrder.verify(outMock).println("\t1. List books");
@@ -41,5 +41,17 @@ public class OptionPresenterShould {
         inOrder.verify(outMock).println("\t3. Return a book");
         inOrder.verify(outMock).println("\t0. Exit");
         verifyNoMoreInteractions(outMock);
+    }
+
+    @Test
+    public void askForBookCheckOut() {
+        appPresenter.askForBookCheckOut();
+        verify(outMock).println("What book do you want to checkout?");
+    }
+
+    @Test
+    public void askForBookReturn() {
+        appPresenter.askForBookReturn();
+        verify(outMock).println("What book do you want to return?");
     }
 }

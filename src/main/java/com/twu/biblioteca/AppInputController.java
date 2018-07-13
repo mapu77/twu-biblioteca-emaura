@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import java.io.InputStream;
 import java.util.Scanner;
 
-class MenuInputController {
+class AppInputController {
     private final Scanner scanner;
     private Integer selectedOption;
 
-    MenuInputController(InputStream inputScanner) {
+    AppInputController(InputStream inputScanner) {
         this.scanner = new Scanner(inputScanner);
     }
 
@@ -23,7 +23,4 @@ class MenuInputController {
         return this.selectedOption;
     }
 
-    String readBookTitle() {
-        return scanner.nextLine();
-    }
 }

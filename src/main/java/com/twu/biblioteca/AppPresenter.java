@@ -2,15 +2,18 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 
-class OptionPresenter {
+class AppPresenter {
     private static final String WELCOME_MESSAGE = "Welcome to the Bangalore Public Library system";
     private static final String FANCY_LINE = "----------------------------------------------";
-    private static final String END_OF_LINE = "\n";
 
     private final PrintStream output;
 
-    OptionPresenter(PrintStream output) {
+    AppPresenter(PrintStream output) {
         this.output = output;
+    }
+
+    void sayFarewell() {
+        output.println("Thanks for using our system");
     }
 
     void sayWelcome() {
@@ -27,16 +30,16 @@ class OptionPresenter {
         output.println("\t0. Exit");
     }
 
-    void askForCheckOut() {
+    void askForBookCheckOut() {
         output.println("What book do you want to checkout?");
     }
 
-    void askForReturn() {
+    void askForBookReturn() {
         output.println("What book do you want to return?");
     }
 
     void sayInvalidOption() {
         output.println("Select a valid option!");
-        System.out.println();
+        output.println();
     }
 }
