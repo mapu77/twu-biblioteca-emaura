@@ -1,6 +1,6 @@
-package com.twu.biblioteca.movies;
+package com.twu.biblioteca.movies.core;
 
-class Movie {
+public class Movie {
     private static final double MINIMUM_RATING = 1.0;
     private static final double MAXIMUM_RATING = 10.0;
     private final String name;
@@ -8,15 +8,15 @@ class Movie {
     private Integer year;
     private Double rating;
 
-    Movie(String name) {
+    public Movie(String name) {
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
-    String getDirectorName() {
+    public String getDirectorName() {
         return directorName;
     }
 
@@ -24,7 +24,7 @@ class Movie {
         this.directorName = directorName;
     }
 
-    Integer getYear() {
+    public Integer getYear() {
         return year;
     }
 
@@ -32,11 +32,11 @@ class Movie {
         this.year = year;
     }
 
-    Double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    void setRating(Double rating) {
+    public void setRating(Double rating) {
         verifyValidRating(rating);
         this.rating = rating;
     }

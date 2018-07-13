@@ -1,5 +1,7 @@
 package com.twu.biblioteca.movies;
 
+import com.twu.biblioteca.movies.application.MovieShelves;
+import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 

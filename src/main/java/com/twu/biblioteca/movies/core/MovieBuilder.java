@@ -1,31 +1,31 @@
-package com.twu.biblioteca.movies;
+package com.twu.biblioteca.movies.core;
 
-class MovieBuilder {
+public class MovieBuilder {
     private final String name;
     private String directorName;
     private int year;
     private Double rate;
 
-    MovieBuilder(String movieName) {
+    public MovieBuilder(String movieName) {
         this.name = movieName;
     }
 
-    MovieBuilder fromDirector(String directorName) {
+    public MovieBuilder fromDirector(String directorName) {
         this.directorName = directorName;
         return this;
     }
 
-    MovieBuilder releasedInYear(int yearOfRelease) {
+    public MovieBuilder releasedInYear(int yearOfRelease) {
         this.year = yearOfRelease;
         return this;
     }
 
-    MovieBuilder ratedWithA(double rate) {
+    public MovieBuilder ratedWithA(double rate) {
         this.rate = rate;
         return this;
     }
 
-    Movie build() {
+    public Movie build() {
         Movie movie = new Movie(name);
         movie.setDirectorName(directorName);
         movie.setYear(year);

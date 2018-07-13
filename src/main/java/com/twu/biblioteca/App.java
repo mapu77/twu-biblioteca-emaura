@@ -4,8 +4,8 @@ import com.twu.biblioteca.books.application.BookShelvesInteractor;
 import com.twu.biblioteca.books.infrastructure.AbstractBookPresenter;
 import com.twu.biblioteca.books.infrastructure.BookInputController;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
-import com.twu.biblioteca.movies.MoviePresenter;
-import com.twu.biblioteca.movies.MovieShelvesInteractor;
+import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
+import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 
 public class App {
 

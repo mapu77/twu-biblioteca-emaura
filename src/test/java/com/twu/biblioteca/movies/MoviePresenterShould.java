@@ -1,5 +1,8 @@
 package com.twu.biblioteca.movies;
 
+import com.twu.biblioteca.movies.application.MovieShelves;
+import com.twu.biblioteca.movies.core.MovieBuilder;
+import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -24,7 +27,7 @@ public class MoviePresenterShould {
 
     @Test
     public void sayThereAreNoFilmsWhenThereAreNoFilmsInTheShelves() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.EMPTY_LIST);
+        when(movieShelvesMock.listMovies()).thenReturn(Collections.emptyList());
         presenter.listMovies();
         verify(fakeOutput).println("There are no movies in the shelves");
     }
@@ -56,6 +59,6 @@ public class MoviePresenterShould {
                 new MovieBuilder("Not rated movie").fromDirector("Director").releasedInYear(1961).build()
         ));
         presenter.listMovies();
-        verify(fakeOutput).println("Not rated movie\t\t\t\tDirector\t\t\t\t1961\t\t4\t\tUnrated");
+        verify(fakeOutput).println("Not rated movie\t\t\t\tDirector\t\t\t\t1961\t\t\t\tUnrated");
     }
 }
