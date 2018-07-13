@@ -27,6 +27,7 @@ class AppPresenter {
         output.println("\t1. List books");
         output.println("\t2. Checkout a book");
         output.println("\t3. Return a book");
+        output.println("\t4. List movies");
         output.println("\t0. Exit");
     }
 

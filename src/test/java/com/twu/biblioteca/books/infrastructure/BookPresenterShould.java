@@ -83,7 +83,6 @@ public class BookPresenterShould {
                         .build()));
         presenter.listBooks();
         InOrder inOrder = inOrder(outMock);
-        inOrder.verify(outMock).println("Title\t\tAuthor\t\tPublication year\n----------------------------------------");
         inOrder.verify(outMock).println("Game of Thrones - A Game of Thrones\t\tGeorge R. Martin\t\t1996");
         inOrder.verify(outMock).println("Harry Potter and the Philosopher's Stone\t\tJ.K. Rowling\t\t1997");
     }
