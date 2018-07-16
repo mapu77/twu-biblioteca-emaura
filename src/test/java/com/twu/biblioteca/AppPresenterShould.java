@@ -40,6 +40,7 @@ public class AppPresenterShould {
         inOrder.verify(outMock).println("\t2. Checkout a book");
         inOrder.verify(outMock).println("\t3. Return a book");
         inOrder.verify(outMock).println("\t4. List movies");
+        inOrder.verify(outMock).println("\t5. Checkout a movie");
         inOrder.verify(outMock).println("\t0. Exit");
         verifyNoMoreInteractions(outMock);
     }
@@ -54,5 +55,11 @@ public class AppPresenterShould {
     public void askForBookReturn() {
         appPresenter.askForBookReturn();
         verify(outMock).println("What book do you want to return?");
+    }
+
+    @Test
+    public void askForMovieCheckOut() {
+        appPresenter.askForMovieCheckOut();
+        verify(outMock).println("What movie do you want to checkout?");
     }
 }

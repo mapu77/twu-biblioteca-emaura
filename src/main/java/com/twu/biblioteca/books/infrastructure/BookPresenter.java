@@ -42,7 +42,7 @@ public class BookPresenter implements AbstractBookPresenter {
     }
 
     @Override
-    public void checkOut(String bookTitle) {
+    public void checkOutBook(String bookTitle) {
         try {
             bookShelves.checkOut(bookTitle);
             output.println(THANK_YOU_FOR_CHECKING_OUT);

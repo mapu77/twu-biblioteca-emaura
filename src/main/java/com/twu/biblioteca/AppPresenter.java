@@ -28,6 +28,7 @@ class AppPresenter {
         output.println("\t2. Checkout a book");
         output.println("\t3. Return a book");
         output.println("\t4. List movies");
+        output.println("\t5. Checkout a movie");
         output.println("\t0. Exit");
     }
 
@@ -42,5 +43,9 @@ class AppPresenter {
     void sayInvalidOption() {
         output.println("Select a valid option!");
         output.println();
+    }
+
+    void askForMovieCheckOut() {
+        output.println("What movie do you want to checkout?");
     }
 }

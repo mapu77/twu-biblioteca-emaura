@@ -109,21 +109,21 @@ public class BookPresenterShould {
                         .fromAuthor("J.K. Rowling")
                         .publishedInYear(1997)
                         .build()));
-        presenter.checkOut("Harry Potter and the Philosopher's Stone");
+        presenter.checkOutBook("Harry Potter and the Philosopher's Stone");
         verify(outMock).println("Thank you! Enjoy the book");
     }
 
     @Test
     public void sayTheBookIsNotAvailableWhenTheBookIsCheckedOut() {
         doThrow(BookNotAvailable.class).when(bookShelvesMock).checkOut(anyString());
-        presenter.checkOut("Harry Potter and the Philosopher's Stone");
+        presenter.checkOutBook("Harry Potter and the Philosopher's Stone");
         verify(outMock).println("That book is not available");
     }
 
     @Test
     public void sayTheBookIsNotAvailableWhenTheBookIsNotInTheShelves() {
         doThrow(BookNotFound.class).when(bookShelvesMock).checkOut(anyString());
-        presenter.checkOut("Harry Potter and the Philosopher's Stone");
+        presenter.checkOutBook("Harry Potter and the Philosopher's Stone");
         verify(outMock).println("That book is not available");
     }
 

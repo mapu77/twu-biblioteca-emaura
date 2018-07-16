@@ -5,6 +5,7 @@ import com.twu.biblioteca.books.infrastructure.AbstractBookPresenter;
 import com.twu.biblioteca.books.infrastructure.BookInputController;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
 import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
+import com.twu.biblioteca.movies.infrastructure.MovieInputController;
 import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 
 public class App {
@@ -30,7 +31,7 @@ public class App {
                 case 2:
                     appPresenter.askForBookCheckOut();
                     String bookTitle = bookInputController.readBookTitle();
-                    bookPresenter.checkOut(bookTitle);
+                    bookPresenter.checkOutBook(bookTitle);
                     break;
                 case 3:
                     appPresenter.askForBookReturn();
@@ -39,6 +40,12 @@ public class App {
                     break;
                 case 4:
                     moviePresenter.listMovies();
+                    break;
+                case 5:
+                    appPresenter.askForMovieCheckOut();
+                    MovieInputController movieInputController = new MovieInputController(System.in);
+                    String movieName = movieInputController.readMovieName();
+                    moviePresenter.checkOutMovie(movieName);
                     break;
                 default:
                     appPresenter.sayInvalidOption();

@@ -1,7 +1,9 @@
 package com.twu.biblioteca.movies;
 
+import com.twu.biblioteca.movies.application.MovieNotFound;
 import com.twu.biblioteca.movies.application.MovieShelves;
 import com.twu.biblioteca.movies.core.MovieBuilder;
+import com.twu.biblioteca.movies.core.MovieNotAvailable;
 import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,5 +62,36 @@ public class MoviePresenterShould {
         ));
         presenter.listMovies();
         verify(fakeOutput).println("Not rated movie\t\t\t\tDirector\t\t\t\t1961\t\t\t\tUnrated");
+    }
+
+    @Test
+    public void notShowCheckedOutMovies() {
+        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
+                new MovieBuilder("Checked out movie").fromDirector("Director").releasedInYear(1961).checkedOut().build()
+        ));
+        presenter.listMovies();
+        verify(fakeOutput).println("There are no movies in the shelves");
+    }
+
+    @Test
+    public void sayThankYouWhenCheckingOutAMovie() {
+        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
+                new MovieBuilder("West Side Story").fromDirector("Jerome Robbins").releasedInYear(1961).ratedWithA(7.6).build()));
+        presenter.checkOutMovie("Harry Potter and the Philosopher's Stone");
+        verify(fakeOutput).println("Thank you! Enjoy the movie");
+    }
+
+    @Test
+    public void sayTheMovieIsNotAvailableWhenCheckingOutANonExistingMovie() {
+        doThrow(MovieNotFound.class).when(movieShelvesMock).checkOutMovie(anyString());
+        presenter.checkOutMovie("The Cube");
+        verify(fakeOutput).println("That movie is not available");
+    }
+
+    @Test
+    public void sayTheMovieIsNotAvailableWhenCheckingOutACheckOutMovie() {
+        doThrow(MovieNotAvailable.class).when(movieShelvesMock).checkOutMovie(anyString());
+        presenter.checkOutMovie("The Cube");
+        verify(fakeOutput).println("That movie is not available");
     }
 }

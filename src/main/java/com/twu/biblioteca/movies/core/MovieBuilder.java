@@ -5,6 +5,7 @@ public class MovieBuilder {
     private String directorName;
     private int year;
     private Double rate;
+    private boolean checkedOut;
 
     public MovieBuilder(String movieName) {
         this.name = movieName;
@@ -30,6 +31,12 @@ public class MovieBuilder {
         movie.setDirectorName(directorName);
         movie.setYear(year);
         movie.setRating(rate);
+        movie.setCheckOut(checkedOut);
         return movie;
+    }
+
+    public MovieBuilder checkedOut() {
+        this.checkedOut = true;
+        return this;
     }
 }

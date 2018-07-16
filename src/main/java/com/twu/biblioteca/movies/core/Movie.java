@@ -7,9 +7,11 @@ public class Movie {
     private String directorName;
     private Integer year;
     private Double rating;
+    private boolean checkOut;
 
     public Movie(String name) {
         this.name = name;
+        this.checkOut = false;
     }
 
     public String getName() {
@@ -53,5 +55,18 @@ public class Movie {
     private boolean isBelowTheThreshold(Double rating) {
         if (rating != null) return new Double(MINIMUM_RATING).compareTo(rating) > 0;
         return false;
+    }
+
+    void setCheckOut(boolean checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public boolean isAvailable() {
+        return !this.checkOut;
+    }
+
+    public void checkOut() {
+        if (this.isAvailable()) setCheckOut(true);
+        else throw new MovieNotAvailable();
     }
 }
