@@ -1,30 +1,26 @@
 package com.twu.biblioteca.movies.application;
 
-import org.hamcrest.MatcherAssert;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
+import java.util.Optional;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MovieShelvesInteractorShould {
 
-    private MovieShelvesInteractor movieShelvesInteractor;
+    private MovieRepository movieRepoMock;
 
-    @Test
-    public void returnAnEmptyCollectionOfMoviesWhenThereAreNoMoviesInIt() {
-        movieShelvesInteractor = new MovieShelvesInteractor();
-        MatcherAssert.assertThat(movieShelvesInteractor.listMovies().isEmpty(), is(true));
-    }
-
-    @Test
-    public void haveSomeMoviesPreloaded() {
-        movieShelvesInteractor = new MovieShelvesInteractor();
-        movieShelvesInteractor.preload();
-        MatcherAssert.assertThat(movieShelvesInteractor.listMovies().isEmpty(), is(false));
+    @Before
+    public void setUp() {
+        movieRepoMock = mock(MovieRepository.class);
     }
 
     @Test(expected = MovieNotFound.class)
     public void throwMovieNotFoundWhenCheckingOutAMovieNotInTheShelves() {
-        movieShelvesInteractor = new MovieShelvesInteractor();
+        when(movieRepoMock.find("A non existing movie")).thenReturn(Optional.empty());
+        MovieShelvesInteractor movieShelvesInteractor = new MovieShelvesInteractor(movieRepoMock);
         movieShelvesInteractor.checkOutMovie("A non existing movie");
     }
 }

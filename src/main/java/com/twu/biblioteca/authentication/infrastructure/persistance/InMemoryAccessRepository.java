@@ -1,4 +1,4 @@
-package com.twu.biblioteca.authentication.persistance;
+package com.twu.biblioteca.authentication.infrastructure.persistance;
 
 import com.twu.biblioteca.authentication.application.AccessRepository;
 

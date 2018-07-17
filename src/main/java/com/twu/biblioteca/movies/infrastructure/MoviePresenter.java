@@ -30,13 +30,13 @@ public class MoviePresenter {
         output.println("What movie do you want to checkout?");
     }
 
-    public void listMovies() {
+    public void listAvailableMovies() {
         Collection<Movie> movies = movieShelves.listMovies();
-        List<Movie> filteredMovies = movies.stream().filter(Movie::isAvailable).collect(Collectors.toList());
-        if (filteredMovies.isEmpty()) output.println("There are no movies in the shelves");
+        List<Movie> availableMovies = movies.stream().filter(Movie::isAvailable).collect(Collectors.toList());
+        if (availableMovies.isEmpty()) output.println("There are no movies in the shelves");
         else {
             output.println(HEADERS);
-            for (Movie movie : filteredMovies) {
+            for (Movie movie : availableMovies) {
                 String rating = movie.getRating() == null ? UNRATED_TAG : movie.getRating().toString();
                 output.println(movie.getName() + SPACE_BETWEEN_COLUMNS + movie.getDirectorName() +
                         SPACE_BETWEEN_COLUMNS + movie.getYear() + SPACE_BETWEEN_COLUMNS + rating);

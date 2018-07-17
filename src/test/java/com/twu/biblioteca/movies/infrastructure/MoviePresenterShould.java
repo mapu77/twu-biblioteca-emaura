@@ -29,7 +29,7 @@ public class MoviePresenterShould {
     @Test
     public void sayThereAreNoFilmsWhenThereAreNoFilmsInTheShelves() {
         when(movieShelvesMock.listMovies()).thenReturn(Collections.emptyList());
-        presenter.listMovies();
+        presenter.listAvailableMovies();
         verify(fakeOutput).println("There are no movies in the shelves");
     }
 
@@ -37,7 +37,7 @@ public class MoviePresenterShould {
     public void printHeadersFirstWhenThereAreMoviesToList() {
         when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("Test film 1").fromDirector("fake Director").releasedInYear(1990).ratedWithA(8.0).build()));
-        presenter.listMovies();
+        presenter.listAvailableMovies();
         verify(fakeOutput).println("Name\t\t\t\tDirector\t\t\t\tRelease year\t\t\t\tRating" +
                 "\n-------------------------------------------------------------------------------");
     }
@@ -48,7 +48,7 @@ public class MoviePresenterShould {
                 new MovieBuilder("West Side Story").fromDirector("Jerome Robbins").releasedInYear(1961).ratedWithA(7.6).build(),
                 new MovieBuilder("Psicosi").fromDirector("Alfred Hitchcock").releasedInYear(1960).ratedWithA(8.5).build()
         ));
-        presenter.listMovies();
+        presenter.listAvailableMovies();
         InOrder inOrder = inOrder(fakeOutput);
         inOrder.verify(fakeOutput).println("West Side Story\t\t\t\tJerome Robbins\t\t\t\t1961\t\t\t\t7.6");
         inOrder.verify(fakeOutput).println("Psicosi\t\t\t\tAlfred Hitchcock\t\t\t\t1960\t\t\t\t8.5");
@@ -59,7 +59,7 @@ public class MoviePresenterShould {
         when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("Not rated movie").fromDirector("Director").releasedInYear(1961).build()
         ));
-        presenter.listMovies();
+        presenter.listAvailableMovies();
         verify(fakeOutput).println("Not rated movie\t\t\t\tDirector\t\t\t\t1961\t\t\t\tUnrated");
     }
 
@@ -68,7 +68,7 @@ public class MoviePresenterShould {
         when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("Checked out movie").fromDirector("Director").releasedInYear(1961).checkedOut().build()
         ));
-        presenter.listMovies();
+        presenter.listAvailableMovies();
         verify(fakeOutput).println("There are no movies in the shelves");
     }
 
