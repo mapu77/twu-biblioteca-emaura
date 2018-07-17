@@ -1,16 +1,19 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.accounts.application.AccountInteractor;
+import com.twu.biblioteca.accounts.infrastructure.AccountPresenter;
+import com.twu.biblioteca.accounts.infrastructure.persistence.InMemoryAccountRepository;
 import com.twu.biblioteca.authentication.application.Authenticator;
 import com.twu.biblioteca.authentication.infrastructure.AuthenticatorInputController;
 import com.twu.biblioteca.authentication.infrastructure.AuthenticatorPresenter;
 import com.twu.biblioteca.authentication.infrastructure.InvalidLibraryNumber;
-import com.twu.biblioteca.authentication.infrastructure.persistance.InMemoryAccessRepository;
+import com.twu.biblioteca.authentication.infrastructure.persistence.InMemoryAccessRepository;
 import com.twu.biblioteca.books.application.BookRepository;
 import com.twu.biblioteca.books.application.BookShelvesInteractor;
 import com.twu.biblioteca.books.infrastructure.AbstractBookPresenter;
 import com.twu.biblioteca.books.infrastructure.BookInputController;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
-import com.twu.biblioteca.books.infrastructure.persistance.InMemoryBookRepository;
+import com.twu.biblioteca.books.infrastructure.persistence.InMemoryBookRepository;
 import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
 import com.twu.biblioteca.movies.infrastructure.MovieInputController;
 import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
@@ -31,6 +34,8 @@ public class App {
     private static BookRepository bookRepository = new InMemoryBookRepository(Arrays.asList(
             new String[]{"Harry Potter and the Philosopher's Stone", "J.K. Rowling", "1997"},
             new String[]{"Game of Thrones: A Game of Thrones", "George R. Martin", "1996"}));
+    private static InMemoryAccountRepository accountRepository = new InMemoryAccountRepository(Arrays.asList(
+            new String[][]{new String[]{"Eduard Maura", "emaura@thoughtworks.com", "Fake Street 123", "+1 123 456 789", "123-1234"}}));
 
     public static void main(String[] args) {
         AppPresenter appPresenter = new AppPresenter(System.out);
@@ -49,6 +54,9 @@ public class App {
         AuthenticatorInputController authenticatorInputController = new AuthenticatorInputController(System.in);
         Authenticator authenticator = new Authenticator(accessRepository);
         AuthenticatorPresenter authenticatorPresenter = new AuthenticatorPresenter(authenticator, System.out);
+
+        AccountInteractor accountInteractor = new AccountInteractor(accountRepository);
+        AccountPresenter accountPresenter = new AccountPresenter(accountInteractor, System.out);
         while (account == null) {
             try {
                 appPresenter.askForLibraryNumber();
@@ -83,6 +91,9 @@ public class App {
                     moviePresenter.askForMovieCheckOut();
                     String movieName = movieInputController.readMovieName();
                     moviePresenter.checkOutMovie(movieName);
+                    break;
+                case 6:
+                    accountPresenter.showInfoOf(account);
                     break;
                 default:
                     appPresenter.sayInvalidOption();

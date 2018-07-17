@@ -41,6 +41,7 @@ public class AppPresenterShould {
         inOrder.verify(outMock).println("\t3. Return a book");
         inOrder.verify(outMock).println("\t4. List movies");
         inOrder.verify(outMock).println("\t5. Checkout a movie");
+        inOrder.verify(outMock).println("\t6. Show account details");
         inOrder.verify(outMock).println("\t0. Exit");
         verifyNoMoreInteractions(outMock);
     }

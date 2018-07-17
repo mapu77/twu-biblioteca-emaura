@@ -1,4 +1,4 @@
-package com.twu.biblioteca.books.infrastructure.persistance;
+package com.twu.biblioteca.books.infrastructure.persistence;
 
 import org.junit.Test;
 

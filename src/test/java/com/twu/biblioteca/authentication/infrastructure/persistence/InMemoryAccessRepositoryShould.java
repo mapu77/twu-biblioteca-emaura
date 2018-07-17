@@ -1,4 +1,4 @@
-package com.twu.biblioteca.authentication.infrastructure.persistance;
+package com.twu.biblioteca.authentication.infrastructure.persistence;
 
 import org.junit.Test;
 
