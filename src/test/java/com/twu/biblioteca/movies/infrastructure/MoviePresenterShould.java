@@ -1,10 +1,9 @@
-package com.twu.biblioteca.movies;
+package com.twu.biblioteca.movies.infrastructure;
 
 import com.twu.biblioteca.movies.application.MovieNotFound;
 import com.twu.biblioteca.movies.application.MovieShelves;
 import com.twu.biblioteca.movies.core.MovieBuilder;
 import com.twu.biblioteca.movies.core.MovieNotAvailable;
-import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -93,5 +92,11 @@ public class MoviePresenterShould {
         doThrow(MovieNotAvailable.class).when(movieShelvesMock).checkOutMovie(anyString());
         presenter.checkOutMovie("The Cube");
         verify(fakeOutput).println("That movie is not available");
+    }
+
+    @Test
+    public void askForMovieCheckOut() {
+        presenter.askForMovieCheckOut();
+        verify(fakeOutput).println("What movie do you want to checkout?");
     }
 }

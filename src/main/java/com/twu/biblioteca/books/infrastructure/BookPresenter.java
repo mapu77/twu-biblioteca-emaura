@@ -28,6 +28,16 @@ public class BookPresenter implements AbstractBookPresenter {
         this.output = output;
     }
 
+    @Override
+    public void askForBookReturn() {
+        output.println("What book do you want to return?");
+    }
+
+    @Override
+    public void askForBookCheckOut() {
+        output.println("What book do you want to checkout?");
+    }
+
     public void listBooks() {
         List<BookInfo> books = (List<BookInfo>) bookShelves.listBooks();
         books.sort(Comparator.comparing(BookInfo::getTitle));

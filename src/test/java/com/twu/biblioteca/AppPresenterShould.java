@@ -46,20 +46,14 @@ public class AppPresenterShould {
     }
 
     @Test
-    public void askForBookCheckOut() {
-        appPresenter.askForBookCheckOut();
-        verify(outMock).println("What book do you want to checkout?");
+    public void askForUserLibraryNumber() {
+        appPresenter.askForLibraryNumber();
+        verify(outMock).print("Library number: ");
     }
 
     @Test
-    public void askForBookReturn() {
-        appPresenter.askForBookReturn();
-        verify(outMock).println("What book do you want to return?");
-    }
-
-    @Test
-    public void askForMovieCheckOut() {
-        appPresenter.askForMovieCheckOut();
-        verify(outMock).println("What movie do you want to checkout?");
+    public void askForUserPassword() {
+        appPresenter.askForPassword();
+        verify(outMock).print("Password: ");
     }
 }

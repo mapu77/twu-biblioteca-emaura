@@ -32,20 +32,16 @@ class AppPresenter {
         output.println("\t0. Exit");
     }
 
-    void askForBookCheckOut() {
-        output.println("What book do you want to checkout?");
-    }
-
-    void askForBookReturn() {
-        output.println("What book do you want to return?");
-    }
-
     void sayInvalidOption() {
         output.println("Select a valid option!");
         output.println();
     }
 
-    void askForMovieCheckOut() {
-        output.println("What movie do you want to checkout?");
+    void askForLibraryNumber() {
+        output.print("Library number: ");
+    }
+
+    void askForPassword() {
+        output.print("Password: ");
     }
 }

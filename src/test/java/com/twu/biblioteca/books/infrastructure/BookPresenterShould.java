@@ -20,7 +20,7 @@ public class BookPresenterShould {
 
     private BookShelves bookShelvesMock;
     private PrintStream outMock;
-    private BookPresenter presenter;
+    private AbstractBookPresenter presenter;
 
     @Before
     public void setUp() {
@@ -153,4 +153,17 @@ public class BookPresenterShould {
         presenter.returnBook("Harry Potter and the Philosopher's Stone");
         verify(outMock).println("That is not a valid book to return");
     }
+
+    @Test
+    public void askForBookCheckOut() {
+        presenter.askForBookCheckOut();
+        verify(outMock).println("What book do you want to checkout?");
+    }
+
+    @Test
+    public void askForBookReturn() {
+        presenter.askForBookReturn();
+        verify(outMock).println("What book do you want to return?");
+    }
+
 }

@@ -26,6 +26,10 @@ public class MoviePresenter {
         this.output = output;
     }
 
+    public void askForMovieCheckOut() {
+        output.println("What movie do you want to checkout?");
+    }
+
     public void listMovies() {
         Collection<Movie> movies = movieShelves.listMovies();
         List<Movie> filteredMovies = movies.stream().filter(Movie::isAvailable).collect(Collectors.toList());

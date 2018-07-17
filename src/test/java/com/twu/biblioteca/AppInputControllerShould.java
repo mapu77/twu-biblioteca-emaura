@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -11,10 +10,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AppInputControllerShould {
 
     private AppInputController inputController;
-
-    @Before
-    public void setUp() {
-    }
 
     @Test
     public void returnTrueWhenUserWantsToExit() {

@@ -1,8 +1,5 @@
-package com.twu.biblioteca.movies;
+package com.twu.biblioteca.movies.core;
 
-import com.twu.biblioteca.movies.core.InvalidRatingValue;
-import com.twu.biblioteca.movies.core.Movie;
-import com.twu.biblioteca.movies.core.MovieNotAvailable;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.nullValue;
