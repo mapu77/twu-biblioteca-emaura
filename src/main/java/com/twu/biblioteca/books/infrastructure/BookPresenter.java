@@ -1,13 +1,12 @@
 package com.twu.biblioteca.books.infrastructure;
 
 import com.twu.biblioteca.books.application.BookNotFound;
-import com.twu.biblioteca.books.application.BookShelves;
 import com.twu.biblioteca.books.core.BookInfo;
 import com.twu.biblioteca.books.core.BookNotAvailable;
 import com.twu.biblioteca.books.core.NotAbleToReturnBook;
 
 import java.io.PrintStream;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,14 +37,13 @@ public class BookPresenter implements AbstractBookPresenter {
         output.println("What book do you want to checkout?");
     }
 
-    public void listBooks() {
-        List<BookInfo> books = (List<BookInfo>) bookShelves.listBooks();
-        books.sort(Comparator.comparing(BookInfo::getTitle));
-        List<BookInfo> filteredBooks = books.stream().filter(BookInfo::isAvailable).collect(Collectors.toList());
-        if (filteredBooks.isEmpty()) output.println("There are no books in the shelves");
+    public void listAvailableBooks() {
+        Collection<BookInfo> books = bookShelves.listBooks();
+        List<BookInfo> availableBooks = books.stream().filter(BookInfo::isAvailable).collect(Collectors.toList());
+        if (availableBooks.isEmpty()) output.println("There are no books in the shelves");
         else {
             output.println(HEADERS);
-            for (BookInfo bookInfo : filteredBooks) {
+            for (BookInfo bookInfo : availableBooks) {
                 output.println(bookInfo.getTitle() + SPACE_BETWEEN_COLUMNS + bookInfo.getAuthorName() + SPACE_BETWEEN_COLUMNS + bookInfo.getPublicationYear());
             }
         }

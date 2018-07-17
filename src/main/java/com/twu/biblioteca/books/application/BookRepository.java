@@ -3,11 +3,10 @@ package com.twu.biblioteca.books.application;
 import com.twu.biblioteca.books.core.BookInfo;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface BookShelves {
+public interface BookRepository {
     Collection<BookInfo> listBooks();
 
-    void checkOut(String bookTitle) throws BookNotFound;
-
-    void returnBook(String bookTitle) throws BookNotFound;
+    Optional<BookInfo> find(String bookTitle);
 }

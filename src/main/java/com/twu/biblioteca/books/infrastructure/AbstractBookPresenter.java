@@ -5,7 +5,7 @@ public interface AbstractBookPresenter {
 
     void askForBookCheckOut();
 
-    void listBooks();
+    void listAvailableBooks();
 
     void checkOutBook(String bookTitle);
 

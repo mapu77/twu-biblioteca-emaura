@@ -1,45 +1,35 @@
 package com.twu.biblioteca.books.application;
 
 import com.twu.biblioteca.books.core.BookInfo;
-import com.twu.biblioteca.books.core.BookInfoBuilder;
+import com.twu.biblioteca.books.infrastructure.BookShelves;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 public class BookShelvesInteractor implements BookShelves {
 
-    private Map<String, BookInfo> books;
+    private final BookRepository bookRepository;
 
-    public BookShelvesInteractor() {
-        this.books = new HashMap<>();
+    public BookShelvesInteractor(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public Collection<BookInfo> listBooks() {
-        return new ArrayList<>(this.books.values());
+        return this.bookRepository.listBooks();
     }
 
     @Override
     public void checkOut(String bookTitle) {
-        if (this.books.containsKey(bookTitle))
-            this.books.get(bookTitle).checkOut();
+        Optional<BookInfo> book = this.bookRepository.find(bookTitle);
+        if (book.isPresent()) book.get().checkOut();
         else throw new BookNotFound();
     }
 
     @Override
     public void returnBook(String bookTitle) {
-        if (this.books.containsKey(bookTitle))
-            this.books.get(bookTitle).returnCopy();
+        Optional<BookInfo> book = this.bookRepository.find(bookTitle);
+        if (book.isPresent()) book.get().returnCopy();
         else throw new BookNotFound();
     }
 
-    public void preloadBooks() {
-        BookInfo book1 = new BookInfoBuilder().withTitle("Harry Potter and the Philosopher's Stone").fromAuthor("J.K Rowling").publishedInYear(1997).build();
-        BookInfo book2 = new BookInfoBuilder().withTitle("Game of Thrones - A Game of Thrones").fromAuthor("George R. Martin").publishedInYear(1994).build();
-        BookInfo book3 = new BookInfoBuilder().withTitle("The Da Vinci Code").fromAuthor("Dan Brown").publishedInYear(2003).checkedOut().build();
-        this.books.put(book1.getTitle(), book1);
-        this.books.put(book2.getTitle(), book2);
-        this.books.put(book3.getTitle(), book3);
-    }
 }

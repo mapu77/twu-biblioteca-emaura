@@ -1,5 +1,6 @@
-package com.twu.biblioteca.movies.application;
+package com.twu.biblioteca.movies.infrastructure;
 
+import com.twu.biblioteca.movies.application.MovieNotFound;
 import com.twu.biblioteca.movies.core.Movie;
 
 import java.util.Collection;

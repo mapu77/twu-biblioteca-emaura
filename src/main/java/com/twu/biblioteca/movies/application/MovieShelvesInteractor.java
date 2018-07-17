@@ -1,6 +1,7 @@
 package com.twu.biblioteca.movies.application;
 
 import com.twu.biblioteca.movies.core.Movie;
+import com.twu.biblioteca.movies.infrastructure.MovieShelves;
 
 import java.util.Collection;
 import java.util.Optional;

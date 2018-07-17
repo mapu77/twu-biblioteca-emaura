@@ -1,7 +1,6 @@
 package com.twu.biblioteca.movies.infrastructure;
 
 import com.twu.biblioteca.movies.application.MovieNotFound;
-import com.twu.biblioteca.movies.application.MovieShelves;
 import com.twu.biblioteca.movies.core.MovieBuilder;
 import com.twu.biblioteca.movies.core.MovieNotAvailable;
 import org.junit.Before;
