@@ -14,7 +14,7 @@ class UserInput {
     boolean wantsToExit() {
         if (scanner.hasNext()) {
             this.selectedOption = Integer.valueOf(scanner.nextLine());
-            return this.selectedOption == 0;
+            return this.selectedOption == AppOptions.EXIT.ordinal();
         }
         return false;
     }

@@ -20,9 +20,11 @@ import com.twu.biblioteca.movies.infrastructure.persistance.InMemoryMovieReposit
 
 import java.util.Arrays;
 
-public class App {
+import static com.twu.biblioteca.AppOptions.INVALID_OPTION;
 
+public class App {
     private static String account;
+
     private static InMemoryAccessRepository accessRepository = new InMemoryAccessRepository(
             Arrays.asList(new String[][]{new String[]{"123-1234", "1234"}}));
     private static InMemoryMovieRepository movieRepository = new InMemoryMovieRepository(Arrays.asList(
@@ -69,29 +71,36 @@ public class App {
         }
         appPresenter.showMenu();
         while (!userInput.wantsToExit()) {
-            switch (userInput.getSelectedOption()) {
-                case 1:
+            Integer selectedOption = userInput.getSelectedOption();
+            AppOptions appOption;
+            try {
+                appOption = AppOptions.values()[selectedOption];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                appOption = INVALID_OPTION;
+            }
+            switch (appOption) {
+                case LIST_BOOKS:
                     bookPresenter.listAvailableBooks();
                     break;
-                case 2:
+                case CHECKOUT_BOOK:
                     bookPresenter.askForBookCheckOut();
                     String bookTitle = bookInput.readBookTitle();
                     bookPresenter.checkOutBook(bookTitle);
                     break;
-                case 3:
+                case RETURN_BOOK:
                     bookPresenter.askForBookReturn();
                     bookTitle = bookInput.readBookTitle();
                     bookPresenter.returnBook(bookTitle);
                     break;
-                case 4:
+                case LIST_MOVIES:
                     moviePresenter.listAvailableMovies();
                     break;
-                case 5:
+                case CHECKOUT_MOVIE:
                     moviePresenter.askForMovieCheckOut();
                     String movieName = movieInput.readMovieName();
                     moviePresenter.checkOutMovie(movieName);
                     break;
-                case 6:
+                case ACCOUNT_DETAILS:
                     accountPresenter.showInfoOf(account);
                     break;
                 default:
