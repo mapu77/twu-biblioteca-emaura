@@ -8,8 +8,6 @@ import com.twu.biblioteca.books.core.NotAbleToReturnBook;
 
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class BookPresenter {
     private static final String SPACE_BETWEEN_COLUMNS = "\t\t";
@@ -37,8 +35,7 @@ public class BookPresenter {
     }
 
     public void listAvailableBooks() {
-        Collection<Book> books = bookShelves.listBooks();
-        List<Book> availableBooks = books.stream().filter(Book::isAvailable).collect(Collectors.toList());
+        Collection<Book> availableBooks = bookShelves.listAvailableBooks();
         if (availableBooks.isEmpty()) output.println("There are no books in the shelves");
         else {
             output.println(HEADERS);

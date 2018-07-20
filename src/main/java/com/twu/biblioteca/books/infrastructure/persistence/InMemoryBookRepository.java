@@ -2,7 +2,7 @@ package com.twu.biblioteca.books.infrastructure.persistence;
 
 import com.twu.biblioteca.books.application.BookRepository;
 import com.twu.biblioteca.books.core.Book;
-import com.twu.biblioteca.books.core.BookInfoBuilder;
+import com.twu.biblioteca.books.core.BookBuilder;
 
 import java.util.Collection;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class InMemoryBookRepository implements BookRepository {
     }
 
     private Function<String[], Book> mapBook() {
-        return values -> new BookInfoBuilder().withTitle(values[0]).fromAuthor(values[1]).publishedInYear(Integer.parseInt(values[2])).build();
+        return values -> new BookBuilder().withTitle(values[0]).fromAuthor(values[1]).publishedInYear(Integer.parseInt(values[2])).build();
     }
 
     private Function<String[], String> mapKey() {

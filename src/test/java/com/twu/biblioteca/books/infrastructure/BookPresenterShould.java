@@ -2,7 +2,7 @@ package com.twu.biblioteca.books.infrastructure;
 
 import com.twu.biblioteca.books.application.BookNotFound;
 import com.twu.biblioteca.books.application.BookShelves;
-import com.twu.biblioteca.books.core.BookInfoBuilder;
+import com.twu.biblioteca.books.core.BookBuilder;
 import com.twu.biblioteca.books.core.BookNotAvailable;
 import com.twu.biblioteca.books.core.NotAbleToReturnBook;
 import org.junit.Before;
@@ -30,15 +30,15 @@ public class BookPresenterShould {
 
     @Test
     public void sayThereAreNoBooksInTheShelves() {
-        when(bookShelvesMock.listBooks()).thenReturn(Collections.emptyList());
+        when(bookShelvesMock.listAvailableBooks()).thenReturn(Collections.emptyList());
         presenter.listAvailableBooks();
         verify(outMock).println("There are no books in the shelves");
     }
 
     @Test
     public void showTheHeadersBeforeAnyBookInfo() {
-        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
-                new BookInfoBuilder()
+        when(bookShelvesMock.listAvailableBooks()).thenReturn(Collections.singletonList(
+                new BookBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
                         .publishedInYear(1997)
@@ -50,13 +50,13 @@ public class BookPresenterShould {
 
     @Test
     public void showAsManyBooksAsThereAreInTheShelves() {
-        when(bookShelvesMock.listBooks()).thenReturn(Arrays.asList(
-                new BookInfoBuilder()
+        when(bookShelvesMock.listAvailableBooks()).thenReturn(Arrays.asList(
+                new BookBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
                         .publishedInYear(1997)
                         .build(),
-                new BookInfoBuilder()
+                new BookBuilder()
                         .withTitle("Game of Thrones - A Game of Thrones")
                         .fromAuthor("George R. Martin")
                         .publishedInYear(1996)
@@ -68,23 +68,9 @@ public class BookPresenterShould {
     }
 
     @Test
-    public void notShowCheckOutBooks() {
-        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
-                new BookInfoBuilder()
-                        .withTitle("Harry Potter and the Philosopher's Stone")
-                        .fromAuthor("J.K. Rowling")
-                        .publishedInYear(1997)
-                        .checkedOut()
-                        .build()));
-
-        presenter.listAvailableBooks();
-        verify(outMock).println("There are no books in the shelves");
-    }
-
-    @Test
     public void sayThankYouWhenCheckingOutABook() {
-        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
-                new BookInfoBuilder()
+        when(bookShelvesMock.listAvailableBooks()).thenReturn(Collections.singletonList(
+                new BookBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
                         .publishedInYear(1997)
@@ -109,8 +95,8 @@ public class BookPresenterShould {
 
     @Test
     public void sayThanksForReturningABook() {
-        when(bookShelvesMock.listBooks()).thenReturn(Collections.singletonList(
-                new BookInfoBuilder()
+        when(bookShelvesMock.listAvailableBooks()).thenReturn(Collections.singletonList(
+                new BookBuilder()
                         .withTitle("Harry Potter and the Philosopher's Stone")
                         .fromAuthor("J.K. Rowling")
                         .publishedInYear(1997)

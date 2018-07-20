@@ -4,6 +4,7 @@ import com.twu.biblioteca.books.core.Book;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class BookShelves {
 
@@ -13,8 +14,9 @@ public class BookShelves {
         this.bookRepository = bookRepository;
     }
 
-    public Collection<Book> listBooks() {
-        return this.bookRepository.listBooks();
+    public Collection<Book> listAvailableBooks() {
+        Collection<Book> books = this.bookRepository.listBooks();
+        return books.stream().filter(Book::isAvailable).collect(Collectors.toList());
     }
 
     public void checkOut(String bookTitle) {

@@ -1,22 +1,22 @@
 package com.twu.biblioteca.books.core;
 
-public class BookInfoBuilder {
+public class BookBuilder {
     private String title;
     private String author;
     private int publicationYear;
     private boolean checkedOut;
 
-    public BookInfoBuilder withTitle(String title) {
+    public BookBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public BookInfoBuilder fromAuthor(String author) {
+    public BookBuilder fromAuthor(String author) {
         this.author = author;
         return this;
     }
 
-    public BookInfoBuilder publishedInYear(int year) {
+    public BookBuilder publishedInYear(int year) {
         this.publicationYear = year;
         return this;
     }
@@ -30,7 +30,7 @@ public class BookInfoBuilder {
 
     }
 
-    public BookInfoBuilder checkedOut() {
+    public BookBuilder checkedOut() {
         this.checkedOut = true;
         return this;
     }
