@@ -1,12 +1,11 @@
 package com.twu.biblioteca.books.application;
 
 import com.twu.biblioteca.books.core.BookInfo;
-import com.twu.biblioteca.books.infrastructure.BookShelves;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public class BookShelvesInteractor implements BookShelves {
+public class BookShelvesInteractor {
 
     private final BookRepository bookRepository;
 
@@ -18,14 +17,12 @@ public class BookShelvesInteractor implements BookShelves {
         return this.bookRepository.listBooks();
     }
 
-    @Override
     public void checkOut(String bookTitle) {
         Optional<BookInfo> book = this.bookRepository.find(bookTitle);
         if (book.isPresent()) book.get().checkOut();
         else throw new BookNotFound();
     }
 
-    @Override
     public void returnBook(String bookTitle) {
         Optional<BookInfo> book = this.bookRepository.find(bookTitle);
         if (book.isPresent()) book.get().returnCopy();

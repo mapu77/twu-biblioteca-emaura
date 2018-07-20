@@ -17,9 +17,9 @@ import static org.mockito.Mockito.*;
 
 public class BookPresenterShould {
 
-    private BookShelves bookShelvesMock;
+    private BookShelvesInteractor bookShelvesMock;
     private PrintStream outMock;
-    private AbstractBookPresenter presenter;
+    private BookPresenter presenter;
 
     @Before
     public void setUp() {

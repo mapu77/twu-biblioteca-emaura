@@ -1,6 +1,7 @@
 package com.twu.biblioteca.movies.infrastructure;
 
 import com.twu.biblioteca.movies.application.MovieNotFound;
+import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
 import com.twu.biblioteca.movies.core.MovieBuilder;
 import com.twu.biblioteca.movies.core.MovieNotAvailable;
 import org.junit.Before;
@@ -14,13 +15,13 @@ import java.util.Collections;
 import static org.mockito.Mockito.*;
 
 public class MoviePresenterShould {
-    private MovieShelves movieShelvesMock;
+    private MovieShelvesInteractor movieShelvesMock;
     private PrintStream fakeOutput;
     private MoviePresenter presenter;
 
     @Before
     public void setUp() {
-        movieShelvesMock = mock(MovieShelves.class);
+        movieShelvesMock = mock(MovieShelvesInteractor.class);
         fakeOutput = mock(PrintStream.class);
         presenter = new MoviePresenter(movieShelvesMock, fakeOutput);
     }

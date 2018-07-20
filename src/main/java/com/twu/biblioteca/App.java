@@ -10,7 +10,6 @@ import com.twu.biblioteca.authentication.infrastructure.InvalidLibraryNumber;
 import com.twu.biblioteca.authentication.infrastructure.persistence.InMemoryAccessRepository;
 import com.twu.biblioteca.books.application.BookRepository;
 import com.twu.biblioteca.books.application.BookShelvesInteractor;
-import com.twu.biblioteca.books.infrastructure.AbstractBookPresenter;
 import com.twu.biblioteca.books.infrastructure.BookInputController;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
 import com.twu.biblioteca.books.infrastructure.persistence.InMemoryBookRepository;
@@ -43,7 +42,7 @@ public class App {
 
         BookShelvesInteractor bookShelves = new BookShelvesInteractor(bookRepository);
         BookInputController bookInputController = new BookInputController(System.in);
-        AbstractBookPresenter bookPresenter = new BookPresenter(bookShelves, System.out);
+        BookPresenter bookPresenter = new BookPresenter(bookShelves, System.out);
 
         MovieInputController movieInputController = new MovieInputController(System.in);
         MovieShelvesInteractor movieShelves = new MovieShelvesInteractor(movieRepository);
