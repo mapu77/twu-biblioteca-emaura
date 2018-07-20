@@ -4,6 +4,7 @@ import com.twu.biblioteca.movies.core.Movie;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MovieShelves {
 
@@ -13,8 +14,9 @@ public class MovieShelves {
         this.movieRepository = movieRepository;
     }
 
-    public Collection<Movie> listMovies() {
-        return movieRepository.list();
+    public Collection<Movie> listAvailableMovies() {
+        Collection<Movie> movies = movieRepository.list();
+        return movies.stream().filter(Movie::isAvailable).collect(Collectors.toList());
     }
 
     public void checkOutMovie(String movieName) {

@@ -28,14 +28,14 @@ public class MoviePresenterShould {
 
     @Test
     public void sayThereAreNoFilmsWhenThereAreNoFilmsInTheShelves() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.emptyList());
+        when(movieShelvesMock.listAvailableMovies()).thenReturn(Collections.emptyList());
         presenter.listAvailableMovies();
         verify(fakeOutput).println("There are no movies in the shelves");
     }
 
     @Test
     public void printHeadersFirstWhenThereAreMoviesToList() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
+        when(movieShelvesMock.listAvailableMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("Test film 1").fromDirector("fake Director").releasedInYear(1990).ratedWithA(8.0).build()));
         presenter.listAvailableMovies();
         verify(fakeOutput).println("Name\t\t\t\tDirector\t\t\t\tRelease year\t\t\t\tRating" +
@@ -44,7 +44,7 @@ public class MoviePresenterShould {
 
     @Test
     public void printAsManyMoviesAsThereAreInTheShelves() {
-        when(movieShelvesMock.listMovies()).thenReturn(Arrays.asList(
+        when(movieShelvesMock.listAvailableMovies()).thenReturn(Arrays.asList(
                 new MovieBuilder("West Side Story").fromDirector("Jerome Robbins").releasedInYear(1961).ratedWithA(7.6).build(),
                 new MovieBuilder("Psicosi").fromDirector("Alfred Hitchcock").releasedInYear(1960).ratedWithA(8.5).build()
         ));
@@ -56,7 +56,7 @@ public class MoviePresenterShould {
 
     @Test
     public void printUnratedMoviesWithUnratedTag() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
+        when(movieShelvesMock.listAvailableMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("Not rated movie").fromDirector("Director").releasedInYear(1961).build()
         ));
         presenter.listAvailableMovies();
@@ -64,17 +64,8 @@ public class MoviePresenterShould {
     }
 
     @Test
-    public void notShowCheckedOutMovies() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
-                new MovieBuilder("Checked out movie").fromDirector("Director").releasedInYear(1961).checkedOut().build()
-        ));
-        presenter.listAvailableMovies();
-        verify(fakeOutput).println("There are no movies in the shelves");
-    }
-
-    @Test
     public void sayThankYouWhenCheckingOutAMovie() {
-        when(movieShelvesMock.listMovies()).thenReturn(Collections.singletonList(
+        when(movieShelvesMock.listAvailableMovies()).thenReturn(Collections.singletonList(
                 new MovieBuilder("West Side Story").fromDirector("Jerome Robbins").releasedInYear(1961).ratedWithA(7.6).build()));
         presenter.checkOutMovie("Harry Potter and the Philosopher's Stone");
         verify(fakeOutput).println("Thank you! Enjoy the movie");

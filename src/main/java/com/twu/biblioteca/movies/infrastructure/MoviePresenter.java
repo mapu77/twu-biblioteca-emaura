@@ -7,8 +7,6 @@ import com.twu.biblioteca.movies.core.MovieNotAvailable;
 
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MoviePresenter {
     private static final String SPACE_BETWEEN_COLUMNS = "\t\t\t\t";
@@ -31,8 +29,7 @@ public class MoviePresenter {
     }
 
     public void listAvailableMovies() {
-        Collection<Movie> movies = movieShelves.listMovies();
-        List<Movie> availableMovies = movies.stream().filter(Movie::isAvailable).collect(Collectors.toList());
+        Collection<Movie> availableMovies = movieShelves.listAvailableMovies();
         if (availableMovies.isEmpty()) output.println("There are no movies in the shelves");
         else {
             output.println(HEADERS);
