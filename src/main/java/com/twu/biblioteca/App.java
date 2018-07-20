@@ -4,17 +4,17 @@ import com.twu.biblioteca.accounts.application.AccountInteractor;
 import com.twu.biblioteca.accounts.infrastructure.AccountPresenter;
 import com.twu.biblioteca.accounts.infrastructure.persistence.InMemoryAccountRepository;
 import com.twu.biblioteca.authentication.application.Authenticator;
-import com.twu.biblioteca.authentication.infrastructure.AuthenticatorInputController;
+import com.twu.biblioteca.authentication.infrastructure.AuthenticatorInput;
 import com.twu.biblioteca.authentication.infrastructure.AuthenticatorPresenter;
 import com.twu.biblioteca.authentication.infrastructure.InvalidLibraryNumber;
 import com.twu.biblioteca.authentication.infrastructure.persistence.InMemoryAccessRepository;
 import com.twu.biblioteca.books.application.BookRepository;
-import com.twu.biblioteca.books.application.BookShelvesInteractor;
-import com.twu.biblioteca.books.infrastructure.BookInputController;
+import com.twu.biblioteca.books.application.BookShelves;
+import com.twu.biblioteca.books.infrastructure.BookInput;
 import com.twu.biblioteca.books.infrastructure.BookPresenter;
 import com.twu.biblioteca.books.infrastructure.persistence.InMemoryBookRepository;
-import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
-import com.twu.biblioteca.movies.infrastructure.MovieInputController;
+import com.twu.biblioteca.movies.application.MovieShelves;
+import com.twu.biblioteca.movies.infrastructure.MovieInput;
 import com.twu.biblioteca.movies.infrastructure.MoviePresenter;
 import com.twu.biblioteca.movies.infrastructure.persistance.InMemoryMovieRepository;
 
@@ -38,19 +38,19 @@ public class App {
 
     public static void main(String[] args) {
         AppPresenter appPresenter = new AppPresenter(System.out);
-        AppInputController user = new AppInputController(System.in);
+        UserInput userInput = new UserInput(System.in);
 
-        BookShelvesInteractor bookShelves = new BookShelvesInteractor(bookRepository);
-        BookInputController bookInputController = new BookInputController(System.in);
+        BookShelves bookShelves = new BookShelves(bookRepository);
+        BookInput bookInput = new BookInput(System.in);
         BookPresenter bookPresenter = new BookPresenter(bookShelves, System.out);
 
-        MovieInputController movieInputController = new MovieInputController(System.in);
-        MovieShelvesInteractor movieShelves = new MovieShelvesInteractor(movieRepository);
+        MovieInput movieInput = new MovieInput(System.in);
+        MovieShelves movieShelves = new MovieShelves(movieRepository);
         MoviePresenter moviePresenter = new MoviePresenter(movieShelves, System.out);
 
         appPresenter.sayWelcome();
 
-        AuthenticatorInputController authenticatorInputController = new AuthenticatorInputController(System.in);
+        AuthenticatorInput authenticatorInput = new AuthenticatorInput(System.in);
         Authenticator authenticator = new Authenticator(accessRepository);
         AuthenticatorPresenter authenticatorPresenter = new AuthenticatorPresenter(authenticator, System.out);
 
@@ -59,28 +59,28 @@ public class App {
         while (account == null) {
             try {
                 appPresenter.askForLibraryNumber();
-                String libraryNumber = authenticatorInputController.entersLibraryNumber();
+                String libraryNumber = authenticatorInput.entersLibraryNumber();
                 appPresenter.askForPassword();
-                String password = authenticatorInputController.entersPassword();
+                String password = authenticatorInput.entersPassword();
                 if (authenticatorPresenter.canAccess(libraryNumber, password)) account = libraryNumber;
             } catch (InvalidLibraryNumber e) {
                 authenticatorPresenter.warnInvalidLibraryNumber();
             }
         }
         appPresenter.showMenu();
-        while (!user.wantsToExit()) {
-            switch (user.getSelectedOption()) {
+        while (!userInput.wantsToExit()) {
+            switch (userInput.getSelectedOption()) {
                 case 1:
                     bookPresenter.listAvailableBooks();
                     break;
                 case 2:
                     bookPresenter.askForBookCheckOut();
-                    String bookTitle = bookInputController.readBookTitle();
+                    String bookTitle = bookInput.readBookTitle();
                     bookPresenter.checkOutBook(bookTitle);
                     break;
                 case 3:
                     bookPresenter.askForBookReturn();
-                    bookTitle = bookInputController.readBookTitle();
+                    bookTitle = bookInput.readBookTitle();
                     bookPresenter.returnBook(bookTitle);
                     break;
                 case 4:
@@ -88,7 +88,7 @@ public class App {
                     break;
                 case 5:
                     moviePresenter.askForMovieCheckOut();
-                    String movieName = movieInputController.readMovieName();
+                    String movieName = movieInput.readMovieName();
                     moviePresenter.checkOutMovie(movieName);
                     break;
                 case 6:

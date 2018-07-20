@@ -5,11 +5,11 @@ import com.twu.biblioteca.movies.core.Movie;
 import java.util.Collection;
 import java.util.Optional;
 
-public class MovieShelvesInteractor {
+public class MovieShelves {
 
     private final MovieRepository movieRepository;
 
-    public MovieShelvesInteractor(MovieRepository movieRepository) {
+    public MovieShelves(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 

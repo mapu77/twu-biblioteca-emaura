@@ -8,15 +8,15 @@ import java.util.Optional;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BookShelvesInteractorShould {
+public class BookShelvesShould {
 
     private BookRepository bookRepoMock;
-    private BookShelvesInteractor bookShelves;
+    private BookShelves bookShelves;
 
     @Before
     public void setUp() {
         this.bookRepoMock = mock(BookRepository.class);
-        bookShelves = new BookShelvesInteractor(bookRepoMock);
+        bookShelves = new BookShelves(bookRepoMock);
     }
 
     @Test(expected = BookNotFound.class)

@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import java.io.InputStream;
 import java.util.Scanner;
 
-class AppInputController {
+class UserInput {
     private final Scanner scanner;
     private Integer selectedOption;
 
-    AppInputController(InputStream inputScanner) {
+    UserInput(InputStream inputScanner) {
         this.scanner = new Scanner(inputScanner);
     }
 

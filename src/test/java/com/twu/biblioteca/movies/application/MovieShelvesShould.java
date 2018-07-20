@@ -8,7 +8,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class MovieShelvesInteractorShould {
+public class MovieShelvesShould {
 
     private MovieRepository movieRepoMock;
 
@@ -20,7 +20,7 @@ public class MovieShelvesInteractorShould {
     @Test(expected = MovieNotFound.class)
     public void throwMovieNotFoundWhenCheckingOutAMovieNotInTheShelves() {
         when(movieRepoMock.find("A non existing movie")).thenReturn(Optional.empty());
-        MovieShelvesInteractor movieShelvesInteractor = new MovieShelvesInteractor(movieRepoMock);
+        MovieShelves movieShelvesInteractor = new MovieShelves(movieRepoMock);
         movieShelvesInteractor.checkOutMovie("A non existing movie");
     }
 }

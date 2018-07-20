@@ -1,8 +1,8 @@
 package com.twu.biblioteca.books.infrastructure;
 
 import com.twu.biblioteca.books.application.BookNotFound;
-import com.twu.biblioteca.books.application.BookShelvesInteractor;
-import com.twu.biblioteca.books.core.BookInfo;
+import com.twu.biblioteca.books.application.BookShelves;
+import com.twu.biblioteca.books.core.Book;
 import com.twu.biblioteca.books.core.BookNotAvailable;
 import com.twu.biblioteca.books.core.NotAbleToReturnBook;
 
@@ -20,10 +20,10 @@ public class BookPresenter {
     private static final String THANK_YOU_FOR_RETURNING = "Thank you for returning the book";
     private static final String NOT_VALID_BOOK = "That is not a valid book to return";
 
-    private final BookShelvesInteractor bookShelves;
+    private final BookShelves bookShelves;
     private final PrintStream output;
 
-    public BookPresenter(BookShelvesInteractor bookShelves, PrintStream output) {
+    public BookPresenter(BookShelves bookShelves, PrintStream output) {
         this.bookShelves = bookShelves;
         this.output = output;
     }
@@ -37,13 +37,13 @@ public class BookPresenter {
     }
 
     public void listAvailableBooks() {
-        Collection<BookInfo> books = bookShelves.listBooks();
-        List<BookInfo> availableBooks = books.stream().filter(BookInfo::isAvailable).collect(Collectors.toList());
+        Collection<Book> books = bookShelves.listBooks();
+        List<Book> availableBooks = books.stream().filter(Book::isAvailable).collect(Collectors.toList());
         if (availableBooks.isEmpty()) output.println("There are no books in the shelves");
         else {
             output.println(HEADERS);
-            for (BookInfo bookInfo : availableBooks) {
-                output.println(bookInfo.getTitle() + SPACE_BETWEEN_COLUMNS + bookInfo.getAuthorName() + SPACE_BETWEEN_COLUMNS + bookInfo.getPublicationYear());
+            for (Book book : availableBooks) {
+                output.println(book.getTitle() + SPACE_BETWEEN_COLUMNS + book.getAuthorName() + SPACE_BETWEEN_COLUMNS + book.getPublicationYear());
             }
         }
     }

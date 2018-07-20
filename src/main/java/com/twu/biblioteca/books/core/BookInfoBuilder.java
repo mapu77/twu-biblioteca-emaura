@@ -21,12 +21,12 @@ public class BookInfoBuilder {
         return this;
     }
 
-    public BookInfo build() {
-        BookInfo bookInfo = new BookInfo(title);
-        bookInfo.setAuthorName(this.author);
-        bookInfo.setPublicationYear(this.publicationYear);
-        bookInfo.setCheckedOut(checkedOut);
-        return bookInfo;
+    public Book build() {
+        Book book = new Book(title);
+        book.setAuthorName(this.author);
+        book.setPublicationYear(this.publicationYear);
+        book.setCheckedOut(checkedOut);
+        return book;
 
     }
 

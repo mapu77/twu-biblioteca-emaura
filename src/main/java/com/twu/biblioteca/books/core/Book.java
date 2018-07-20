@@ -1,13 +1,13 @@
 package com.twu.biblioteca.books.core;
 
-public class BookInfo {
+public class Book {
 
     private final String title;
     private String authorName;
     private int publicationYear;
     private boolean checkedOut;
 
-    BookInfo(String title) {
+    Book(String title) {
         this.title = title;
     }
 

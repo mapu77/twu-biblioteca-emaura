@@ -1,7 +1,7 @@
 package com.twu.biblioteca.books.infrastructure;
 
 import com.twu.biblioteca.books.application.BookNotFound;
-import com.twu.biblioteca.books.application.BookShelvesInteractor;
+import com.twu.biblioteca.books.application.BookShelves;
 import com.twu.biblioteca.books.core.BookInfoBuilder;
 import com.twu.biblioteca.books.core.BookNotAvailable;
 import com.twu.biblioteca.books.core.NotAbleToReturnBook;
@@ -17,13 +17,13 @@ import static org.mockito.Mockito.*;
 
 public class BookPresenterShould {
 
-    private BookShelvesInteractor bookShelvesMock;
+    private BookShelves bookShelvesMock;
     private PrintStream outMock;
     private BookPresenter presenter;
 
     @Before
     public void setUp() {
-        bookShelvesMock = mock(BookShelvesInteractor.class);
+        bookShelvesMock = mock(BookShelves.class);
         outMock = mock(PrintStream.class);
         presenter = new BookPresenter(bookShelvesMock, outMock);
     }

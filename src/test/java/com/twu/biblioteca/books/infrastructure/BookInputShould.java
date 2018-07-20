@@ -7,11 +7,11 @@ import java.io.ByteArrayInputStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class BookInputControllerShould {
+public class BookInputShould {
     @Test
     public void readUserBookTitleInput() {
         System.setIn(new ByteArrayInputStream("some input".getBytes()));
-        BookInputController bookInputController = new BookInputController(System.in);
-        assertThat(bookInputController.readBookTitle(), is("some input"));
+        BookInput bookInput = new BookInput(System.in);
+        assertThat(bookInput.readBookTitle(), is("some input"));
     }
 }

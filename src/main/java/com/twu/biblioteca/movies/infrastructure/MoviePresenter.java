@@ -1,7 +1,7 @@
 package com.twu.biblioteca.movies.infrastructure;
 
 import com.twu.biblioteca.movies.application.MovieNotFound;
-import com.twu.biblioteca.movies.application.MovieShelvesInteractor;
+import com.twu.biblioteca.movies.application.MovieShelves;
 import com.twu.biblioteca.movies.core.Movie;
 import com.twu.biblioteca.movies.core.MovieNotAvailable;
 
@@ -18,10 +18,10 @@ public class MoviePresenter {
     private static final String THANK_YOU_FOR_CHECKING_OUT = "Thank you! Enjoy the movie";
     private static final String MOVIE_NOT_AVAILABLE = "That movie is not available";
 
-    private final MovieShelvesInteractor movieShelves;
+    private final MovieShelves movieShelves;
     private final PrintStream output;
 
-    public MoviePresenter(MovieShelvesInteractor movieShelves, PrintStream output) {
+    public MoviePresenter(MovieShelves movieShelves, PrintStream output) {
         this.movieShelves = movieShelves;
         this.output = output;
     }

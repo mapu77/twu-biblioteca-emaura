@@ -3,11 +3,11 @@ package com.twu.biblioteca.authentication.infrastructure;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class AuthenticatorInputController {
+public class AuthenticatorInput {
 
     private final Scanner scanner;
 
-    public AuthenticatorInputController(InputStream in) {
+    public AuthenticatorInput(InputStream in) {
         this.scanner = new Scanner(in);
     }
 
